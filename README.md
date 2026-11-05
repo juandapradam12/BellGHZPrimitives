@@ -1,11 +1,11 @@
-# 🔬 BellGHZPrimitives
+# BellGHZPrimitives
 
 > **Exploring quantum entanglement at scale using IBM Quantum Primitives**  
 > A structured implementation of the [IBM Quantum "Hello World" tutorial](https://quantum.cloud.ibm.com/docs/en/guides/hello-world) — extended from a 2-qubit Bell state to an n-qubit GHZ state, with full support for both **Estimator** and **Sampler** primitives, simulator and real hardware execution.
 
 ---
 
-## 🌌 The Story
+## The Story
 
 Quantum computers don't work like classical computers. They manipulate **qubits** — quantum bits that can exist in superposition, and become **entangled** with each other in ways that have no classical equivalent.
 
@@ -26,13 +26,13 @@ $$|GHZ_n\rangle = \frac{1}{\sqrt{2}}\left(|0\rangle^{\otimes n} + |1\rangle^{\ot
 Both are created by the same circuit pattern: a Hadamard gate on qubit 0, followed by a cascade of CNOT gates.
 
 ```
-q_0: ─H─●───────────
-         │
-q_1: ────X─●────────
-             │
-q_2: ────────X─●───
-                 │
-q_n: ────────────X─
+q_0: -H-*-----------
+         |
+q_1: ----X-*--------
+             |
+q_2: --------X-*---
+                 |
+q_n: ------------X-
 ```
 
 ### The 4-Step Qiskit Pattern
@@ -48,7 +48,7 @@ This project follows the canonical **Qiskit Patterns** workflow:
 
 ---
 
-## 📊 Results
+## Results
 
 ### Step 1 — Bell State Circuit
 
@@ -84,54 +84,54 @@ The Sampler measures raw bitstring probabilities. A perfect 10-qubit GHZ state s
 
 ---
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 BellGHZPrimitives/
-│
-├── main.py                          ← Entry point (PRIMITIVE, MODE, N_QUBITS, N_SHOTS)
-├── requirements.txt
-│
-├── src/
-│   ├── CircuitDefinition/
-│   │   ├── 01_map_problem_to_quantum_native.py   # Bell state circuit + observables
-│   │   └── 01_ghz_state_generator.py             # n-qubit GHZ circuit generator
-│   │
-│   ├── CircuitOptimization/
-│   │   └── 02_circuits_operators_optimization.py # Transpilation to ISA
-│   │
-│   └── PrimitiveExecution/
-│       ├── 03_quantum_estimator_simulator.py     # Estimator on GenericBackendV2
-│       ├── 03_quantum_estimator_execution.py     # Estimator on IBM Quantum hardware
-│       ├── 03_quantum_sampler_simulator.py       # Sampler on GenericBackendV2
-│       └── 03_quantum_sampler_execution.py       # Sampler on IBM Quantum hardware
-│
-├── utils/
-│   ├── config/
-│   │   ├── arg_parser.py     # CLI argument parsing (N_QUBITS, N_SHOTS, PRIMITIVE, MODE)
-│   │   ├── env.py            # Environment variable exports
-│   │   └── qiskit_save_account.py
-│   │
-│   ├── helpers/
-│   │   └── quantum_setup.py  # Shared setup: backend, transpilation, ISA context
-│   │
-│   └── visualization/
-│       ├── estimator.py      # plot_estimator_results, plot_ghz_decay
-│       └── sampler.py        # plot_sampler_results
-│
-└── outputs/
-    ├── data/
-    │   ├── 03_bell_state_results_estimator_simulator.csv
-    │   └── 03_ghz_state_results_sampler_simulator.csv
-    └── figures/
-        ├── 01_bell_state_circuit.png
-        ├── 02_isa_circuit.png
-        └── 03_*.png
+|
++-- main.py                          <- Entry point (PRIMITIVE, MODE, N_QUBITS, N_SHOTS)
++-- requirements.txt
+|
++-- src/
+|   +-- CircuitDefinition/
+|   |   +-- 01_map_problem_to_quantum_native.py   # Bell state circuit + observables
+|   |   +-- 01_ghz_state_generator.py             # n-qubit GHZ circuit generator
+|   |
+|   +-- CircuitOptimization/
+|   |   +-- 02_circuits_operators_optimization.py # Transpilation to ISA
+|   |
+|   +-- PrimitiveExecution/
+|       +-- 03_quantum_estimator_simulator.py     # Estimator on GenericBackendV2
+|       +-- 03_quantum_estimator_execution.py     # Estimator on IBM Quantum hardware
+|       +-- 03_quantum_sampler_simulator.py       # Sampler on GenericBackendV2
+|       +-- 03_quantum_sampler_execution.py       # Sampler on IBM Quantum hardware
+|
++-- utils/
+|   +-- config/
+|   |   +-- arg_parser.py     # CLI argument parsing (N_QUBITS, N_SHOTS, PRIMITIVE, MODE)
+|   |   +-- env.py            # Environment variable exports
+|   |   +-- qiskit_save_account.py
+|   |
+|   +-- helpers/
+|   |   +-- quantum_setup.py  # Shared setup: backend, transpilation, ISA context
+|   |
+|   +-- visualization/
+|       +-- estimator.py      # plot_estimator_results, plot_ghz_decay
+|       +-- sampler.py        # plot_sampler_results
+|
++-- outputs/
+    +-- data/
+    |   +-- 03_bell_state_results_estimator_simulator.csv
+    |   +-- 03_ghz_state_results_sampler_simulator.csv
+    +-- figures/
+        +-- 01_bell_state_circuit.png
+        +-- 02_isa_circuit.png
+        +-- 03_*.png
 ```
 
 ---
 
-## 🚀 Usage
+## Usage
 
 ### Prerequisites
 
@@ -180,7 +180,7 @@ python main.py PRIMITIVE=sampler MODE=hardware N_QUBITS=10 N_SHOTS=4000
 
 ```
 =======================================================
-  BellGHZPrimitives — ejecutando primitiva
+  BellGHZPrimitives
   PRIMITIVE : ESTIMATOR
   MODE      : SIMULATOR
   N_QUBITS  : 10
@@ -192,7 +192,7 @@ Circuito cargado: 10 qubits | N_QUBITS=10
 >>> Job ID: 9722b634-...
 
 --- Resultados Estimator (Simulator) ---
-Observable     Valor esperado      ± Std
+Observable     Valor esperado      +/- Std
 ------------------------------------------
 ZZIIIIIIII             0.9921     0.0054
 ZIZIIIIIII             0.9881     0.0074
@@ -206,12 +206,12 @@ CSV guardado en outputs/data/03_bell_state_results_estimator_simulator.csv
 |---|---|---|---|
 | `PRIMITIVE` | `estimator` \| `sampler` | `estimator` | Quantum primitive to use |
 | `MODE` | `simulator` \| `hardware` | `simulator` | Execution target |
-| `N_QUBITS` | integer ≥ 2 | `2` | Number of qubits in the GHZ state |
+| `N_QUBITS` | integer >= 2 | `2` | Number of qubits in the GHZ state |
 | `N_SHOTS` | integer | `100` | Number of circuit executions |
 
 ---
 
-## 📦 Output Files
+## Output Files
 
 ### CSV (in `outputs/data/`)
 
@@ -228,13 +228,13 @@ CSV guardado en outputs/data/03_bell_state_results_estimator_simulator.csv
 |---|---|
 | `01_bell_state_circuit.png` | GHZ circuit diagram |
 | `02_isa_circuit.png` | Transpiled ISA circuit |
-| `03_bell_state_results_estimator_*` | Bar chart + heatmap of ⟨O⟩ values |
+| `03_bell_state_results_estimator_*` | Bar chart + heatmap of expected values |
 | `03_ghz_decay_estimator_*` | ZZ correlation decay with qubit distance |
 | `03_ghz_state_results_sampler_*` | Bitstring probability distribution |
 
 ---
 
-## 🧠 Key Concepts
+## Key Concepts
 
 ### Primitives
 
@@ -242,13 +242,13 @@ IBM Quantum exposes two fundamental execution primitives:
 
 | Primitive | Returns | Use when |
 |---|---|---|
-| **Estimator** | Expectation values ⟨O⟩ ± std | You want to measure observables (energy, correlations) |
+| **Estimator** | Expectation values ⟨O⟩ +/- std | You want to measure observables (energy, correlations) |
 | **Sampler** | Bitstring distribution (counts) | You want measurement outcomes / state distributions |
 
 ### Error Mitigation
 
-- **Estimator** uses `resilience_level=1` → automatic measurement error mitigation
-- **Hardware Estimator** additionally enables `dynamical_decoupling` with `XY4` sequence to suppress idle qubit decoherence
+- **Estimator** uses `resilience_level=1` — automatic measurement error mitigation.
+- **Hardware Estimator** additionally enables `dynamical_decoupling` with `XY4` sequence to suppress idle qubit decoherence.
 
 ### ISA Circuits
 
@@ -256,7 +256,7 @@ Before execution, circuits are transpiled to the backend's **Instruction Set Arc
 
 ---
 
-## 📚 References
+## References
 
 - [IBM Quantum "Run your first circuit on hardware"](https://quantum.cloud.ibm.com/docs/en/guides/hello-world)
 - [Qiskit Estimator primitive](https://quantum.cloud.ibm.com/docs/en/guides/get-started-with-estimator)
@@ -266,7 +266,7 @@ Before execution, circuits are transpiled to the backend's **Instruction Set Arc
 
 ---
 
-## 👤 Author
+## Author
 
 **Juan David Prada Malagón**  
 Built following the IBM Quantum Platform documentation and extended with multi-qubit GHZ scaling, dual-primitive support, and a structured Python project architecture.
