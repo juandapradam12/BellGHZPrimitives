@@ -46,12 +46,12 @@ for label, ev, std in zip(observables_labels, evs, stds):
 
 # --- CSV ---
 suffix = f"{N_QUBITS}qubits_{N_SHOTS}shots"
-csv_path = f"outputs/data/03_bell_state_results_estimator_simulator_{suffix}.csv"
+csv_path = f"outputs/data/03_bell_state_results_estimator_simulator.csv"
 with open(csv_path, "w", newline="") as f:
     writer = csv.writer(f)
-    writer.writerow(["observable", "expected_value", "std"])
+    writer.writerow(["observable", "expected_value", "std", "n_qubits", "n_shots"])
     for label, ev, std in zip(observables_labels, evs, stds):
-        writer.writerow([label, round(float(ev), 6), round(float(std), 6)])
+        writer.writerow([label, round(float(ev), 6), round(float(std), 6), N_QUBITS, N_SHOTS])
 print(f"\nCSV guardado en {csv_path}")
 
 # --- Plots ---

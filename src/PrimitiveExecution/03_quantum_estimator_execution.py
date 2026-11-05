@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
 from utils.config.env import N_SHOTS, N_QUBITS
 from utils.visualization import plot_estimator_results, plot_ghz_decay
-from utils.quantum_setup import build_hardware_context
+from utils.helpers.quantum_setup import build_hardware_context
 
 # --- Setup compartido ---
 ctx = build_hardware_context()
@@ -48,12 +48,12 @@ for label, ev, std in zip(observables_labels, evs, stds):
 
 # --- CSV ---
 suffix = f"{N_QUBITS}qubits_{N_SHOTS}shots"
-csv_path = f"outputs/data/03_bell_state_results_estimator_q_hardware_{suffix}.csv"
+csv_path = f"outputs/data/03_bell_state_results_estimator_q_hardware.csv"
 with open(csv_path, "w", newline="") as f:
     writer = csv.writer(f)
-    writer.writerow(["observable", "expected_value", "std"])
+    writer.writerow(["observable", "expected_value", "std", "n_qubits", "n_shots"])
     for label, ev, std in zip(observables_labels, evs, stds):
-        writer.writerow([label, round(float(ev), 6), round(float(std), 6)])
+        writer.writerow([label, round(float(ev), 6), round(float(std), 6), N_QUBITS, N_SHOTS])
 print(f"\nCSV guardado en {csv_path}")
 
 # --- Plots ---

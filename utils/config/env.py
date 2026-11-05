@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from utils.config.arg_parser import get_n_qubits, get_n_shots, DEFAULT_SHOTS
+from utils.config.arg_parser import get_n_qubits, get_n_shots, get_primitive, DEFAULT_SHOTS
 
 load_dotenv()
 
@@ -11,3 +11,4 @@ free_instance_crn = os.getenv("FREE_INSTANCE_CRN")
 # Runtime parameters
 N_QUBITS = get_n_qubits()
 N_SHOTS = get_n_shots() or DEFAULT_SHOTS
+PRIMITIVE = get_primitive()

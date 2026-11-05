@@ -49,12 +49,12 @@ for bs, cnt in top:
 
 # --- CSV ---
 suffix = f"{N_QUBITS}qubits_{N_SHOTS}shots"
-csv_path = f"outputs/data/03_ghz_state_results_sampler_simulator_{suffix}.csv"
+csv_path = f"outputs/data/03_ghz_state_results_sampler_simulator.csv"
 with open(csv_path, "w", newline="") as f:
     writer = csv.writer(f)
-    writer.writerow(["bitstring", "counts", "probability"])
+    writer.writerow(["bitstring", "counts", "probability", "n_qubits", "n_shots"])
     for bs, cnt in sorted(counts.items(), key=lambda x: -x[1]):
-        writer.writerow([bs, cnt, round(cnt / N_SHOTS, 6)])
+        writer.writerow([bs, cnt, round(cnt / N_SHOTS, 6), N_QUBITS, N_SHOTS])
 print(f"\nCSV guardado en {csv_path}")
 
 # --- Plot ---

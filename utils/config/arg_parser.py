@@ -1,6 +1,8 @@
 import sys
 
 DEFAULT_SHOTS = 100  # default interno seguro para hardware real
+DEFAULT_PRIMITIVE = "estimator"
+VALID_PRIMITIVES = {"estimator", "sampler"}
 
 
 def get_n_qubits() -> int:
@@ -26,3 +28,25 @@ def get_n_shots() -> int | None:
         if arg.startswith("N_SHOTS="):
             return int(arg.split("=")[1])
     return None
+
+
+def get_primitive() -> str:
+    """
+    Parsea el argumento PRIMITIVE desde la línea de comandos o variable de entorno.
+    Uso: python main.py PRIMITIVE=sampler
+    Valores válidos: estimator | sampler
+    Si no se pasa, retorna el default 'estimator'.
+    """
+    import os
+    # CLI tiene prioridad sobre variable de entorno
+    for arg in sys.argv[1:]:
+        if arg.startswith("PRIMITIVE="):
+            value = arg.split("=")[1].lower()
+            if value not in VALID_PRIMITIVES:
+                raise ValueError(f"PRIMITIVE inválido: '{value}'. Usa: {VALID_PRIMITIVES}")
+            return value
+    # Fallback a variable de entorno
+    env_value = os.getenv("PRIMITIVE", DEFAULT_PRIMITIVE).lower()
+    if env_value not in VALID_PRIMITIVES:
+        raise ValueError(f"PRIMITIVE inválido: '{env_value}'. Usa: {VALID_PRIMITIVES}")
+    return env_value
