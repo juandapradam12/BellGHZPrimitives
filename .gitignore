@@ -1,0 +1,19 @@
+# Entorno virtual
+.venv/
+
+# Variables de entorno
+.env
+
+# Datos
+*.csv
+*.xlsx
+*.xls
+
+# Figuras y outputs generados
+Outputs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.DS_Store
