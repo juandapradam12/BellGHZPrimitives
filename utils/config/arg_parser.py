@@ -3,6 +3,8 @@ import sys
 DEFAULT_SHOTS = 100  # default interno seguro para hardware real
 DEFAULT_PRIMITIVE = "estimator"
 VALID_PRIMITIVES = {"estimator", "sampler"}
+DEFAULT_MODE = "simulator"
+VALID_MODES = {"simulator", "hardware"}
 
 
 def get_n_qubits() -> int:
@@ -49,4 +51,24 @@ def get_primitive() -> str:
     env_value = os.getenv("PRIMITIVE", DEFAULT_PRIMITIVE).lower()
     if env_value not in VALID_PRIMITIVES:
         raise ValueError(f"PRIMITIVE inválido: '{env_value}'. Usa: {VALID_PRIMITIVES}")
+    return env_value
+
+
+def get_mode() -> str:
+    """
+    Parsea el argumento MODE desde la línea de comandos o variable de entorno.
+    Uso: python main.py MODE=hardware
+    Valores válidos: simulator | hardware
+    Si no se pasa, retorna el default 'simulator'.
+    """
+    import os
+    for arg in sys.argv[1:]:
+        if arg.startswith("MODE="):
+            value = arg.split("=")[1].lower()
+            if value not in VALID_MODES:
+                raise ValueError(f"MODE inválido: '{value}'. Usa: {VALID_MODES}")
+            return value
+    env_value = os.getenv("MODE", DEFAULT_MODE).lower()
+    if env_value not in VALID_MODES:
+        raise ValueError(f"MODE inválido: '{env_value}'. Usa: {VALID_MODES}")
     return env_value

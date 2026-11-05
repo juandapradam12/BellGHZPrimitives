@@ -1,13 +1,12 @@
 import importlib, sys, os
 import matplotlib.pyplot as plt
 
-from qiskit_ibm_runtime import QiskitRuntimeService
 from qiskit.transpiler import generate_preset_pass_manager
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))  # raíz del proyecto
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(__file__)), "CircuitDefinition"))  # 01_*
 
-from utils.config.env import N_QUBITS
+from utils.config.env import N_QUBITS, MODE
 
 # --- Selección de circuito según N_QUBITS ---
 # Uso: python3 02_circuits_operators_optimization.py N_QUBITS=100
@@ -27,17 +26,25 @@ else:
 
 print(f"Circuito cargado: {qc.num_qubits} qubits | N_QUBITS={N_QUBITS}")
 
-service = QiskitRuntimeService()
+# --- Backend: solo conectar a IBM Quantum si MODE=hardware ---
+if MODE == "hardware":
+    from qiskit_ibm_runtime import QiskitRuntimeService
+    service = QiskitRuntimeService()
+    backend = service.least_busy(
+        simulator=False, operational=True, min_num_qubits=N_QUBITS
+    )
+    print(f">>> Backend hardware: {backend.name}")
 
-backend = service.least_busy(
-    simulator=False, operational=True, min_num_qubits=N_QUBITS
-)
+    # Convert to an ISA circuit and layout-mapped observables.
+    pm = generate_preset_pass_manager(optimization_level=1, backend=backend)
+    isa_circuit = pm.run(qc)
+    isa_operators_list = [op.apply_layout(isa_circuit.layout) for op in operators]
 
-# Convert to an ISA circuit and layout-mapped observables.
-pm = generate_preset_pass_manager(optimization_level=1, backend=backend)
-isa_circuit = pm.run(qc)
-isa_operators_list = [op.apply_layout(isa_circuit.layout) for op in operators]
-
-fig = isa_circuit.draw("mpl", idle_wires=False)
-fig.savefig("outputs/figures/02_isa_circuit.png", dpi=150, bbox_inches="tight")
-plt.show()
+    fig = isa_circuit.draw("mpl", idle_wires=False)
+    fig.savefig("outputs/figures/02_isa_circuit.png", dpi=150, bbox_inches="tight")
+    plt.show()
+else:
+    # En modo simulator el backend/ISA se construye en quantum_setup.py
+    backend = None
+    isa_circuit = None
+    isa_operators_list = None
