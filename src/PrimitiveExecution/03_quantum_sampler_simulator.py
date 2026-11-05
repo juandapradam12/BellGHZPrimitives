@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
 from utils.config.env import N_SHOTS, N_QUBITS
 from utils.visualization import plot_sampler_results
-from utils.quantum_setup import build_simulator_context, add_measurements
+from utils.helpers.quantum_setup import build_simulator_context, add_measurements
 
 # --- Setup compartido ---
 ctx = build_simulator_context(N_QUBITS)

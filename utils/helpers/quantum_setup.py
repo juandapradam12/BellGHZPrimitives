@@ -15,7 +15,8 @@ from qiskit.transpiler import generate_preset_pass_manager
 from qiskit.providers.fake_provider import GenericBackendV2
 
 # Rutas del proyecto calculadas una sola vez al importar el módulo
-_PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# __file__ = .../utils/helpers/quantum_setup.py  →  subir 3 niveles para llegar a la raíz
+_PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 _SRC = os.path.join(_PROJECT_ROOT, "src")
 
 
