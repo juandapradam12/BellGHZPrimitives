@@ -11,7 +11,7 @@
 !outputs/data/*.csv
 
 # Figuras y outputs generados
-#outputs/
+# outputs/figures se versiona para el README
 
 # Python
 __pycache__/
