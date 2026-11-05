@@ -4,10 +4,11 @@
 # Variables de entorno
 .env
 
-# Datos
+# Datos — se excluyen globalmente excepto outputs/data/
 *.csv
 *.xlsx
 *.xls
+!outputs/data/*.csv
 
 # Figuras y outputs generados
 #outputs/
