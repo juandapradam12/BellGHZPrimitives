@@ -39,5 +39,5 @@ isa_circuit = pm.run(qc)
 isa_operators_list = [op.apply_layout(isa_circuit.layout) for op in operators]
 
 fig = isa_circuit.draw("mpl", idle_wires=False)
-fig.savefig("Outputs/figures/02_isa_circuit.png", dpi=150, bbox_inches="tight")
+fig.savefig("outputs/figures/02_isa_circuit.png", dpi=150, bbox_inches="tight")
 plt.show()

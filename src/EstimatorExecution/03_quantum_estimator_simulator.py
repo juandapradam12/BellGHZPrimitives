@@ -60,7 +60,7 @@ for label, ev, std in zip(observables_labels, evs, stds):
 
 # --- Guardar CSV ---
 suffix = f"{N_QUBITS}qubits_{N_SHOTS}shots"
-csv_path = f"Outputs/data/03_bell_state_results_estimator_simulator_{suffix}.csv"
+csv_path = f"outputs/data/03_bell_state_results_estimator_simulator_{suffix}.csv"
 with open(csv_path, "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(["observable", "expected_value", "std"])
@@ -71,12 +71,12 @@ print(f"\nCSV guardado en {csv_path}")
 # --- Visualizacion ---
 plot_estimator_results(
     observables_labels, evs, stds,
-    save_path=f"Outputs/figures/03_bell_state_results_estimator_simulator_{suffix}.png"
+    save_path=f"outputs/figures/03_bell_state_results_estimator_simulator_{suffix}.png"
 )
 
 if N_QUBITS > 2:
     plot_ghz_decay(
         evs, n_qubits=N_QUBITS,
         label="GHZ state (Simulator)",
-        save_path=f"Outputs/figures/03_ghz_decay_estimator_simulator_{suffix}.png"
+        save_path=f"outputs/figures/03_ghz_decay_estimator_simulator_{suffix}.png"
     )

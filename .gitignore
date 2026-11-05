@@ -10,7 +10,7 @@
 *.xls
 
 # Figuras y outputs generados
-Outputs/
+#outputs/
 
 # Python
 __pycache__/

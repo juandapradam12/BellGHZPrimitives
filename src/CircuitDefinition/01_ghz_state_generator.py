@@ -32,7 +32,7 @@ n = get_n_qubits()
 qc = get_qc_for_n_qubit_GHZ_state(n)
 
 fig = qc.draw("mpl")
-fig.savefig("Outputs/figures/01_bell_state_circuit.png", dpi=150, bbox_inches="tight")
+fig.savefig("outputs/figures/01_bell_state_circuit.png", dpi=150, bbox_inches="tight")
 plt.show()
 
 # ZZII...II, ZIZI...II, ... , ZIII...IZ

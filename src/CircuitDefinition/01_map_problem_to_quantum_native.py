@@ -25,7 +25,7 @@ qc.cx(0, 1)
 # If you're running this in a script, use `print(qc.draw())` to
 # print a text drawing.
 fig = qc.draw("mpl")
-fig.savefig("Outputs/figures/01_bell_state_circuit.png", dpi=150, bbox_inches="tight")
+fig.savefig("outputs/figures/01_bell_state_circuit.png", dpi=150, bbox_inches="tight")
 plt.show()
 
 # Set up six different observables
